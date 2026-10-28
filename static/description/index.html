@@ -1,626 +1,303 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>App Dashboard Visibility - Odoo 17</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --primary: #714B67;
-      --primary-dark: #56334e;
-      --primary-light: #f5eff3;
-      --secondary: #00A09D;
-      --secondary-dark: #007a78;
-      --accent: #017e84;
-      --dark: #212529;
-      --gray-100: #f8f9fa;
-      --gray-200: #e9ecef;
-      --gray-600: #6c757d;
-      --white: #ffffff;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      --radius: 12px;
-    }
+<div class="container my-4" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1E293B;">
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      color: #333333;
-      background-color: #fbfbfd;
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1140px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* Hero Banner */
-    .hero-banner {
-      background: linear-gradient(135deg, #714B67 0%, #46253c 100%);
-      color: var(--white);
-      border-radius: var(--radius);
-      padding: 40px 30px;
-      margin: 25px 0 35px;
-      box-shadow: var(--shadow);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-banner::before {
-      content: "";
-      position: absolute;
-      top: -60px;
-      right: -60px;
-      width: 220px;
-      height: 220px;
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 50%;
-    }
-
-    .banner-img {
-      max-width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-      margin-bottom: 25px;
-    }
-
-    .hero-title {
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 12px;
-    }
-
-    .hero-subtitle {
-      font-size: 1.15rem;
-      font-weight: 300;
-      opacity: 0.95;
-      max-width: 780px;
-      margin: 0 auto 20px;
-    }
-
-    .badges-row {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      background: rgba(255, 255, 255, 0.18);
-      backdrop-filter: blur(8px);
-      color: #fff;
-    }
-
-    /* Highlights / Stats Grid */
-    .highlights-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-
-    .card {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--gray-200);
-      transition: all 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-    }
-
-    .card-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 16px;
-      color: var(--white);
-    }
-
-    .icon-purple { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); }
-    .icon-teal { background: linear-gradient(135deg, var(--secondary), var(--secondary-dark)); }
-    .icon-dark { background: linear-gradient(135deg, #343a40, #212529); }
-    .icon-blue { background: linear-gradient(135deg, #0d6efd, #0b5ed7); }
-
-    .card-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 8px;
-    }
-
-    .card-desc {
-      font-size: 0.95rem;
-      color: var(--gray-600);
-      line-height: 1.5;
-    }
-
-    /* Interactive Showcase Section */
-    .section-title {
-      text-align: center;
-      margin-bottom: 35px;
-    }
-
-    .section-title h2 {
-      font-size: 1.9rem;
-      font-weight: 800;
-      color: var(--dark);
-      margin-bottom: 8px;
-    }
-
-    .section-title p {
-      font-size: 1rem;
-      color: var(--gray-600);
-    }
-
-    .screenshot-showcase {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 25px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--gray-200);
-      margin-bottom: 45px;
-    }
-
-    .screenshot-wrapper {
-      position: relative;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid var(--gray-200);
-      background: #fafafa;
-    }
-
-    .screenshot-wrapper img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-
-    .screenshot-wrapper:hover img {
-      transform: scale(1.015);
-    }
-
-    /* Interactive Simulator */
-    .interactive-simulator {
-      background: #ffffff;
-      border-radius: var(--radius);
-      padding: 30px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--gray-200);
-      margin-bottom: 45px;
-    }
-
-    .simulator-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 25px;
-      padding-bottom: 15px;
-      border-bottom: 2px solid var(--gray-100);
-    }
-
-    .simulator-title {
-      font-weight: 700;
-      font-size: 1.15rem;
-      color: var(--dark);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn-group {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: all 0.2s;
-    }
-
-    .btn-outline-primary {
-      background: #fff;
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-
-    .btn-outline-primary:hover {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      background: var(--primary-dark);
-    }
-
-    .btn-secondary {
-      background: var(--gray-200);
-      color: var(--dark);
-    }
-
-    .btn-secondary:hover {
-      background: #d6d8db;
-    }
-
-    .apps-preview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
-      gap: 15px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .app-tile {
-      background: #f8f9fa;
-      border: 2px solid #e9ecef;
-      border-radius: 12px;
-      padding: 16px 10px;
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.25s ease;
-      position: relative;
-    }
-
-    .app-tile.visible {
-      background: #ffffff;
-      border-color: var(--primary);
-      box-shadow: 0 4px 12px rgba(113, 75, 103, 0.12);
-    }
-
-    .app-tile.hidden {
-      opacity: 0.35;
-      background: #ebebeb;
-      filter: grayscale(1);
-      border-color: #ced4da;
-    }
-
-    .app-tile-icon {
-      font-size: 2.2rem;
-      margin-bottom: 8px;
-      color: var(--primary);
-      transition: transform 0.2s;
-    }
-
-    .app-tile.visible:hover .app-tile-icon {
-      transform: scale(1.1);
-    }
-
-    .app-tile-name {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--dark);
-    }
-
-    .status-indicator {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      position: absolute;
-      top: 8px;
-      right: 8px;
-    }
-
-    .status-indicator.on { background: #28a745; }
-    .status-indicator.off { background: #dc3545; }
-
-    /* Comparison & Features Table */
-    .feature-table-container {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 30px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--gray-200);
-      margin-bottom: 45px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.95rem;
-    }
-
-    th, td {
-      padding: 14px 18px;
-      text-align: left;
-      border-bottom: 1px solid var(--gray-200);
-    }
-
-    th {
-      background-color: var(--gray-100);
-      font-weight: 700;
-      color: var(--dark);
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    .badge-check {
-      color: #28a745;
-      font-size: 1.1rem;
-    }
-
-    /* Notice Banner */
-    .notice-box {
-      background: #fff8e6;
-      border-left: 4px solid #ffc107;
-      padding: 18px 24px;
-      border-radius: 8px;
-      margin-bottom: 45px;
-      font-size: 0.95rem;
-    }
-
-    .notice-box strong {
-      color: #856404;
-    }
-
-    /* Footer */
-    .footer {
-      background: var(--dark);
-      color: #ffffff;
-      border-radius: var(--radius);
-      padding: 35px 30px;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .footer a {
-      color: var(--secondary);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 768px) {
-      .hero-title { font-size: 1.6rem; }
-      .simulator-controls { flex-direction: column; align-items: flex-start; }
-      .btn-group { width: 100%; justify-content: flex-start; }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-
-    <!-- Top Banner -->
-    <div class="hero-banner">
-      <img src="banner.png" alt="App Dashboard Visibility Banner" class="banner-img">
-      <h1 class="hero-title">App Dashboard Visibility</h1>
-      <p class="hero-subtitle">
-        Take complete control over your Odoo dashboard. Hide application icons per security group or per user with zero coding, no group restructuring, and total peace of mind.
-      </p>
-      <div class="badges-row">
-        <span class="badge"><i class="fa fa-code-branch"></i> Odoo 17.0</span>
-        <span class="badge"><i class="fa fa-cubes"></i> Community &amp; Enterprise</span>
-        <span class="badge"><i class="fa fa-tag"></i> Free &amp; Open Source</span>
-        <span class="badge"><i class="fa fa-shield-alt"></i> Non-Intrusive ACL</span>
-      </div>
+    <!-- ================================================================= -->
+    <!-- HERO HEADER SECTION                                               -->
+    <!-- ================================================================= -->
+    <div class="row align-items-center mb-4 p-4 rounded-4 shadow-sm" style="background: #F8FAFC; border-left: 6px solid #714B67; border: 1px solid #E2E8F0;">
+        <div class="col-md-2 text-center mb-3 mb-md-0">
+            <div class="d-inline-flex p-3 rounded-circle shadow-sm" style="background: rgba(113, 75, 103, 0.1); border: 2px solid #714B67;">
+                <i class="fa fa-th-large fa-4x" style="color: #714B67;"></i>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                <h2 class="mb-0 fw-bold" style="color: #212529;">App Dashboard Visibility</h2>
+                <span class="badge rounded-pill" style="background-color: #714B67; color: #FFFFFF; font-size: 0.8rem; padding: 6px 12px;">
+                    <i class="fa fa-bolt me-1"></i>Odoo 17 CE &amp; EE
+                </span>
+                <span class="badge rounded-pill" style="background-color: #059669; color: #FFFFFF; font-size: 0.8rem; padding: 6px 12px;">
+                    <i class="fa fa-shield me-1"></i>Zero ACL Changes
+                </span>
+                <span class="badge rounded-pill" style="background-color: #0284C7; color: #FFFFFF; font-size: 0.8rem; padding: 6px 12px;">
+                    <i class="fa fa-users me-1"></i>Group &amp; User Granular
+                </span>
+                <span class="badge rounded-pill" style="background-color: #D97706; color: #FFFFFF; font-size: 0.8rem; padding: 6px 12px;">
+                    <i class="fa fa-tag me-1"></i>Free &amp; OPL-1
+                </span>
+            </div>
+            <p class="mb-0 fs-6" style="line-height: 1.6; color: #334155;">
+                Take complete control of what every internal user sees on their Odoo dashboard.
+                Administrators decide which root applications each security group or individual user can see —
+                <strong>no code modifications, no tampering with security groups, and zero risk to existing access rights.</strong>
+            </p>
+        </div>
     </div>
 
-    <!-- Interactive Live Demo Sandbox -->
-    <div class="interactive-simulator">
-      <div class="simulator-controls">
-        <div class="simulator-title">
-          <i class="fa fa-sliders-h" style="color: var(--primary);"></i>
-          <span>Interactive Preview: Click any app below to toggle visibility</span>
-        </div>
-        <div class="btn-group">
-          <button class="btn btn-primary" onclick="toggleAll(true)"><i class="fa fa-check-double"></i> Show All</button>
-          <button class="btn btn-secondary" onclick="toggleAll(false)"><i class="fa fa-times"></i> Hide All</button>
-          <button class="btn btn-outline-primary" onclick="resetDefaults()"><i class="fa fa-undo"></i> Reset Defaults</button>
-        </div>
-      </div>
-
-      <div class="apps-preview-grid" id="appsGrid">
-        <div class="app-tile visible" onclick="toggleApp(this)">
-          <span class="status-indicator on"></span>
-          <div class="app-tile-icon"><i class="fa fa-comments"></i></div>
-          <div class="app-tile-name">Discuss</div>
-        </div>
-        <div class="app-tile visible" onclick="toggleApp(this)">
-          <span class="status-indicator on"></span>
-          <div class="app-tile-icon"><i class="fa fa-calendar-alt"></i></div>
-          <div class="app-tile-name">Calendar</div>
-        </div>
-        <div class="app-tile visible" onclick="toggleApp(this)">
-          <span class="status-indicator on"></span>
-          <div class="app-tile-icon"><i class="fa fa-address-book"></i></div>
-          <div class="app-tile-name">Contacts</div>
-        </div>
-        <div class="app-tile visible" onclick="toggleApp(this)">
-          <span class="status-indicator on"></span>
-          <div class="app-tile-icon"><i class="fa fa-chart-line"></i></div>
-          <div class="app-tile-name">CRM</div>
-        </div>
-        <div class="app-tile visible" onclick="toggleApp(this)">
-          <span class="status-indicator on"></span>
-          <div class="app-tile-icon"><i class="fa fa-shopping-cart"></i></div>
-          <div class="app-tile-name">Sales</div>
-        </div>
-        <div class="app-tile visible" onclick="toggleApp(this)">
-          <span class="status-indicator on"></span>
-          <div class="app-tile-icon"><i class="fa fa-file-invoice-dollar"></i></div>
-          <div class="app-tile-name">Invoicing</div>
-        </div>
-        <div class="app-tile visible" onclick="toggleApp(this)">
-          <span class="status-indicator on"></span>
-          <div class="app-tile-icon"><i class="fa fa-boxes"></i></div>
-          <div class="app-tile-name">Inventory</div>
-        </div>
-        <div class="app-tile visible" onclick="toggleApp(this)">
-          <span class="status-indicator on"></span>
-          <div class="app-tile-icon"><i class="fa fa-cogs"></i></div>
-          <div class="app-tile-name">Settings</div>
-        </div>
-      </div>
-      <p style="font-size: 0.85rem; color: #6c757d; text-align: center; margin-top: 10px;">
-        <i class="fa fa-info-circle"></i> In real Odoo usage, hiding an app removes the root icon, its entire sub-menu hierarchy, and home actions for the selected user.
-      </p>
+    <!-- ================================================================= -->
+    <!-- BANNER IMAGE                                                      -->
+    <!-- ================================================================= -->
+    <div class="mb-4 text-center">
+        <img src="banner.png"
+             alt="App Dashboard Visibility Banner"
+             class="img-fluid rounded-4 shadow-sm"
+             style="max-width: 100%; border: 1px solid #E2E8F0;"/>
     </div>
 
-    <!-- Feature Cards -->
-    <div class="highlights-grid">
-      <div class="card">
-        <div class="card-icon icon-purple"><i class="fa fa-users-cog"></i></div>
-        <h3 class="card-title">Group &amp; User Granularity</h3>
-        <p class="card-desc">Set company-wide defaults at the Security Group level, then easily override or create exceptions for specific individual users.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon icon-teal"><i class="fa fa-info-circle"></i></div>
-        <h3 class="card-title">Transparent Origin</h3>
-        <p class="card-desc">Clear <strong>Source</strong> column immediately tells administrators whether an app is hidden by a Group rule or a User-specific override.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon icon-blue"><i class="fa fa-tasks"></i></div>
-        <h3 class="card-title">Bulk Productivity Tools</h3>
-        <p class="card-desc">Includes <strong>Check All</strong>, <strong>Uncheck All</strong>, and <strong>Reset to Group Defaults</strong> buttons for rapid configuration of multi-app instances.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon icon-dark"><i class="fa fa-lock"></i></div>
-        <h3 class="card-title">Safe &amp; Non-Intrusive</h3>
-        <p class="card-desc">Zero modifications to ACLs or record rules. Settings app is always protected from being hidden from system administrators.</p>
-      </div>
+    <!-- ================================================================= -->
+    <!-- SCREENSHOT & NAVIGATION GUIDE                                     -->
+    <!-- ================================================================= -->
+    <div class="mb-4 text-center">
+        <img src="main_screenshot.png"
+             alt="App Dashboard Visibility on User and Group form"
+             class="img-fluid rounded-4 shadow"
+             style="max-width: 100%; border: 1px solid #E2E8F0;"/>
+        <p class="text-muted small mt-2">
+            <i class="fa fa-map-marker me-1 text-danger"></i>
+            <strong>Settings → Users &amp; Companies → Users / Groups</strong> → pilih record → tab <strong>App Dashboard Visibility</strong>
+        </p>
     </div>
 
-    <!-- Actual Screenshot Showcase -->
-    <div class="section-title">
-      <h2>Seamless Integration with Odoo Standard UI</h2>
-      <p>Dedicated tabs under Group and User forms let administrators manage dashboard menus effortlessly.</p>
+    <!-- ================================================================= -->
+    <!-- WHERE TO FIND IT                                                  -->
+    <!-- ================================================================= -->
+    <div class="card border-0 shadow-sm p-4 mb-4 rounded-4" style="background: #F0FDF4; border: 1px solid #86EFAC;">
+        <h4 class="fw-bold mb-3" style="color: #065F46;">
+            <i class="fa fa-map-signs me-2"></i>Where to Find It (Lokasi Pengaturan)
+        </h4>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="d-flex align-items-start gap-3">
+                    <span class="badge bg-success rounded-circle p-2 mt-1" style="min-width:32px; text-align:center;">
+                        <i class="fa fa-users"></i>
+                    </span>
+                    <div>
+                        <div class="fw-bold text-dark mb-1">1. Group Defaults (Opsional)</div>
+                        <code class="small text-muted">
+                            Settings → Users &amp; Companies → Groups<br/>
+                            → pilih group → tab <strong>"App Dashboard Visibility"</strong>
+                        </code>
+                        <p class="text-muted small mt-1 mb-0">
+                            Atur default visibilitas aplikasi root untuk seluruh anggota grup keamanan.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex align-items-start gap-3">
+                    <span class="badge bg-primary rounded-circle p-2 mt-1" style="min-width:32px; text-align:center;">
+                        <i class="fa fa-user"></i>
+                    </span>
+                    <div>
+                        <div class="fw-bold text-dark mb-1">2. User-Specific Visibility &amp; Exceptions</div>
+                        <code class="small text-muted">
+                            Settings → Users &amp; Companies → Users<br/>
+                            → pilih user → tab <strong>"App Dashboard Visibility"</strong>
+                        </code>
+                        <p class="text-muted small mt-1 mb-0">
+                            Override seting visibilitas per individu lengkap dengan penanda kolom <strong>Source</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="screenshot-showcase">
-      <div class="screenshot-wrapper">
-        <img src="main_screenshot.png" alt="Odoo App Dashboard Visibility User Tab Interface">
-      </div>
+    <!-- ================================================================= -->
+    <!-- CORE FEATURES                                                     -->
+    <!-- ================================================================= -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm p-3 rounded-3" style="background: #FFFFFF; border-top: 4px solid #714B67 !important;">
+                <div class="d-flex align-items-center mb-2">
+                    <span class="badge me-2 p-2 rounded-circle" style="background-color: #F3E8FF; color: #714B67;"><i class="fa fa-layer-group fa-lg"></i></span>
+                    <h6 class="card-title mb-0 fw-bold" style="color: #0F172A;">Group &amp; User Level</h6>
+                </div>
+                <p class="card-text text-muted small mb-0">
+                    Konfigurasi visibilitas per grup keamanan dan override per individu pengguna sesuai kebutuhan.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm p-3 rounded-3" style="background: #FFFFFF; border-top: 4px solid #059669 !important;">
+                <div class="d-flex align-items-center mb-2">
+                    <span class="badge me-2 p-2 rounded-circle" style="background-color: #D1FAE5; color: #059669;"><i class="fa fa-info-circle fa-lg"></i></span>
+                    <h6 class="card-title mb-0 fw-bold" style="color: #0F172A;">Source Column</h6>
+                </div>
+                <p class="card-text text-muted small mb-0">
+                    Kolom asal visibilitas transparan: mengetahui apakah status berasal dari user override atau aturan grup.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm p-3 rounded-3" style="background: #FFFFFF; border-top: 4px solid #0284C7 !important;">
+                <div class="d-flex align-items-center mb-2">
+                    <span class="badge me-2 p-2 rounded-circle" style="background-color: #E0F2FE; color: #0284C7;"><i class="fa fa-check-square-o fa-lg"></i></span>
+                    <h6 class="card-title mb-0 fw-bold" style="color: #0F172A;">Bulk Productivity</h6>
+                </div>
+                <p class="card-text text-muted small mb-0">
+                    Tombol aksi cepat <em>Check All</em>, <em>Uncheck All</em>, dan <em>Reset to Group Defaults</em> dalam 1 klik.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm p-3 rounded-3" style="background: #FFFFFF; border-top: 4px solid #DC2626 !important;">
+                <div class="d-flex align-items-center mb-2">
+                    <span class="badge me-2 p-2 rounded-circle" style="background-color: #FEE2E2; color: #DC2626;"><i class="fa fa-lock fa-lg"></i></span>
+                    <h6 class="card-title mb-0 fw-bold" style="color: #0F172A;">Settings Protection</h6>
+                </div>
+                <p class="card-text text-muted small mb-0">
+                    Menu Administrasi (Settings) terlindungi otomatis agar tidak dapat disembunyikan dari Administrator Sistem.
+                </p>
+            </div>
+        </div>
     </div>
 
-    <!-- Safe UI vs Security Notice -->
-    <div class="notice-box">
-      <strong><i class="fa fa-exclamation-triangle"></i> Important Note on Security:</strong>
-      This module controls <em>UI Menu Visibility</em> to provide clean, clutter-free user experiences. It is not an alternative to Odoo's backend security groups, ACLs, or Record Rules. If a user requires strict database access restriction, configure standard Odoo security groups.
+    <!-- ================================================================= -->
+    <!-- HOW VISIBILITY IS RESOLVED                                        -->
+    <!-- ================================================================= -->
+    <div class="card border-0 shadow-sm p-4 mb-4 rounded-4" style="background: #FFFFFF; border: 1px solid #E2E8F0;">
+        <h4 class="fw-bold mb-3" style="color: #212529;">
+            <i class="fa fa-sitemap me-2 text-primary"></i>How Visibility Is Resolved (Aturan Resolusi)
+        </h4>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="p-3 rounded-3 h-100" style="background: #FAF5FF; border: 1px dashed #D8B4FE;">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge rounded-circle p-2 me-2" style="background-color: #714B67; color: #FFFFFF;">1</span>
+                        <h6 class="fw-bold mb-0 text-dark">User Override (Prioritas #1)</h6>
+                    </div>
+                    <p class="text-muted small mb-0">
+                        Jika user memiliki pengaturan individual tersendiri untuk sebuah aplikasi, pengaturan ini yang langsung dimenangkan.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 rounded-3 h-100" style="background: #FFF7ED; border: 1px dashed #FED7AA;">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge bg-warning text-dark rounded-circle p-2 me-2">2</span>
+                        <h6 class="fw-bold mb-0 text-dark">Group Rule (Prioritas #2)</h6>
+                    </div>
+                    <p class="text-muted small mb-0">
+                        Jika tidak ada override user, aplikasi disembunyikan bila minimal satu grup milik user menyembunyikannya.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 rounded-3 h-100" style="background: #F0FDF4; border: 1px dashed #86EFAC;">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge bg-success rounded-circle p-2 me-2">3</span>
+                        <h6 class="fw-bold mb-0 text-dark">Default Visible</h6>
+                    </div>
+                    <p class="text-muted small mb-0">
+                        Jika tidak ada pembatasan baik di level user maupun grup, aplikasi root tampil normal di dashboard.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Specs Table -->
-    <div class="feature-table-container">
-      <h3 style="margin-bottom: 20px; color: var(--dark); font-weight: 700;">Technical Specifications</h3>
-      <table>
-        <tbody>
-          <tr>
-            <td style="width: 30%; font-weight: 600;">Technical Name</td>
-            <td><code>hide_apps_icon</code></td>
-          </tr>
-          <tr>
-            <td style="font-weight: 600;">Odoo Version</td>
-            <td>17.0 Community &amp; Enterprise</td>
-          </tr>
-          <tr>
-            <td style="font-weight: 600;">Core Dependencies</td>
-            <td><code>base</code>, <code>web</code></td>
-          </tr>
-          <tr>
-            <td style="font-weight: 600;">Delegated Access Right</td>
-            <td><code>hide_apps_icon.group_manage_app_visibility</code> (Manage App Dashboard Visibility)</td>
-          </tr>
-          <tr>
-            <td style="font-weight: 600;">License</td>
-            <td>OPL-1 (Odoo Proprietary License v1.0)</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- ================================================================= -->
+    <!-- IMPORTANT SECURITY NOTICE                                         -->
+    <!-- ================================================================= -->
+    <div class="card border-0 shadow-sm p-4 mb-4 rounded-4" style="background: #FEF3C7; border: 1px solid #FCD34D;">
+        <div class="d-flex align-items-start gap-3">
+            <i class="fa fa-exclamation-triangle fa-2x text-warning mt-1"></i>
+            <div>
+                <h5 class="fw-bold mb-1 text-dark">Penting: Modul Manajemen Visibilitas UI (Bukan Pembatas Hak Akses Data)</h5>
+                <p class="mb-0 text-muted small" style="line-height: 1.6;">
+                    Modul ini bertujuan menyederhanakan dan merapikan tampilan dashboard agar bebas dari aplikasi yang tidak relevan bagi user.
+                    Modul <strong>tidak mengubah</strong> hak akses model data, Record Rules, maupun Security Groups Odoo.
+                    Jika Anda butuh membatasi akses baca/tulis data secara ketat, gunakan pengaturan Security Groups bawaan Odoo.
+                </p>
+            </div>
+        </div>
     </div>
 
-    <!-- Footer -->
-    <div class="footer">
-      <p style="font-size: 1.05rem; margin-bottom: 6px; font-weight: 600;">Developed by Arif N Ramadhan</p>
-      <p style="font-size: 0.9rem; opacity: 0.85; margin-bottom: 12px;">Need custom development, support, or integration?</p>
-      <p>
-        <a href="mailto:sqlrif@gmail.com"><i class="fa fa-envelope"></i> sqlrif@gmail.com</a> &nbsp;|&nbsp; 
-        <a href="https://www.niits.id" target="_blank" rel="noopener"><i class="fa fa-globe"></i> www.niits.id</a>
-      </p>
+    <!-- ================================================================= -->
+    <!-- SETUP IN 3 STEPS                                                  -->
+    <!-- ================================================================= -->
+    <div class="card border-0 shadow-sm p-4 mb-4 rounded-4" style="background: #F8FAFC; border: 1px solid #E2E8F0;">
+        <h4 class="fw-bold mb-3" style="color: #212529;">
+            <i class="fa fa-check-square-o me-2 text-primary"></i>Panduan Penggunaan Cepat
+        </h4>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="p-3 bg-white rounded-3 border h-100 shadow-sm">
+                    <div class="fw-bold text-primary mb-1">Langkah 1 — Berikan Hak Kelola</div>
+                    <p class="small text-muted mb-2">Buka user administrator yang ditugaskan:</p>
+                    <div class="p-2 bg-light rounded text-dark small">
+                        Centang hak akses <strong>Manage App Dashboard Visibility</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 bg-white rounded-3 border h-100 shadow-sm">
+                    <div class="fw-bold text-primary mb-1">Langkah 2 — Atur Group / User</div>
+                    <p class="small text-muted mb-2">Buka tab App Dashboard Visibility:</p>
+                    <div class="p-2 bg-light rounded text-dark small">
+                        Hilangkan centang pada aplikasi yang ingin disembunyikan dari dashboard
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 bg-white rounded-3 border h-100 shadow-sm">
+                    <div class="fw-bold text-primary mb-1">Langkah 3 — Refresh Browser</div>
+                    <p class="small text-muted mb-2">Perubahan langsung aktif:</p>
+                    <div class="p-2 bg-light rounded text-dark small">
+                        User cukup reload browser untuk melihat dashboard yang rapi dan terorganisir
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-  </div>
+    <!-- ================================================================= -->
+    <!-- TECHNICAL SPECIFICATION                                           -->
+    <!-- ================================================================= -->
+    <div class="card border-0 shadow-sm p-4 mb-4 rounded-4" style="background: #FFFFFF; border: 1px solid #E2E8F0;">
+        <h5 class="fw-bold mb-3 text-dark">
+            <i class="fa fa-cogs text-primary me-2"></i>Informasi Teknis
+        </h5>
+        <div class="table-responsive">
+            <table class="table table-sm table-bordered align-middle mb-0" style="font-size: 0.85rem;">
+                <tbody>
+                    <tr>
+                        <td class="table-light fw-bold" style="width: 30%;">Technical Name</td>
+                        <td><code>hide_apps_icon</code></td>
+                    </tr>
+                    <tr>
+                        <td class="table-light fw-bold">Compatibility</td>
+                        <td>Odoo 17.0 Community &amp; Enterprise</td>
+                    </tr>
+                    <tr>
+                        <td class="table-light fw-bold">Dependencies</td>
+                        <td><code>base</code>, <code>web</code> (tanpa external library tambahan)</td>
+                    </tr>
+                    <tr>
+                        <td class="table-light fw-bold">Security Group</td>
+                        <td><code>hide_apps_icon.group_manage_app_visibility</code> (Manage App Dashboard Visibility)</td>
+                    </tr>
+                    <tr>
+                        <td class="table-light fw-bold">License</td>
+                        <td>OPL-1 (Odoo Proprietary License v1.0) &bull; Free</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-  <script>
-    function toggleApp(tile) {
-      const isVisible = tile.classList.contains('visible');
-      const indicator = tile.querySelector('.status-indicator');
-      if (isVisible) {
-        tile.classList.remove('visible');
-        tile.classList.add('hidden');
-        indicator.classList.remove('on');
-        indicator.classList.add('off');
-      } else {
-        tile.classList.remove('hidden');
-        tile.classList.add('visible');
-        indicator.classList.remove('off');
-        indicator.classList.add('on');
-      }
-    }
+    <!-- ================================================================= -->
+    <!-- FOOTER                                                            -->
+    <!-- ================================================================= -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center p-3 rounded-3" style="background: #FFFFFF; border: 1px solid #E2E8F0;">
+        <div class="small text-muted">
+            Developed by <strong>Arif N Ramadhan</strong> &bull; License: <strong>OPL-1</strong> &bull; Contact: <strong>sqlrif@gmail.com</strong>
+        </div>
+        <div class="small">
+            <span class="badge bg-secondary">Odoo 17 CE &amp; EE</span>
+            <span class="badge bg-primary ms-1">NIITS Inovasi Teknologi</span>
+            <a href="https://www.niits.id" target="_blank" class="badge bg-dark text-white ms-1 text-decoration-none">www.niits.id</a>
+        </div>
+    </div>
 
-    function toggleAll(show) {
-      const tiles = document.querySelectorAll('.app-tile');
-      tiles.forEach(tile => {
-        const indicator = tile.querySelector('.status-indicator');
-        if (show) {
-          tile.classList.remove('hidden');
-          tile.classList.add('visible');
-          indicator.classList.remove('off');
-          indicator.classList.add('on');
-        } else {
-          tile.classList.remove('visible');
-          tile.classList.add('hidden');
-          indicator.classList.remove('on');
-          indicator.classList.add('off');
-        }
-      });
-    }
-
-    function resetDefaults() {
-      toggleAll(true);
-    }
-  </script>
-</body>
-</html>
+</div>
