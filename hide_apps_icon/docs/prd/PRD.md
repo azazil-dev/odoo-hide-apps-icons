@@ -1,8 +1,8 @@
 # App Dashboard Visibility
 
 **Technical name:** `hide_apps_icon`
-**Version:** 18.0.1.0.0
-**Compatibility:** Odoo 18.0 Community and Enterprise
+**Version:** 19.0.1.0.0
+**Compatibility:** Odoo 19.0 Community and Enterprise
 **Price:** Free
 **Author:** [Arif N Ramadhan](https://www.niits.id)
 **License:** [OPL-1](https://www.odoo.com/documentation/17.0/legal/licenses.html) (Odoo Proprietary License v1.0)

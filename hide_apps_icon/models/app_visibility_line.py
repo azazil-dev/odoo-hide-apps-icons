@@ -29,7 +29,7 @@ class AppVisibilityLine(models.Model):
                     line.source = _('User Setting')
                 else:
                     # Check if any group of this user hides it
-                    user_groups = line.user_id.groups_id
+                    user_groups = getattr(line.user_id, 'group_ids', getattr(line.user_id, 'groups_id', self.env['res.groups']))
                     group_lines = self.search([
                         ('group_id', 'in', user_groups.ids),
                         ('menu_id', '=', line.menu_id.id),

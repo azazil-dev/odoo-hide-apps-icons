@@ -41,7 +41,7 @@ class IrUiMenu(models.Model):
         user_explicit_shown = set(user_lines.filtered(lambda l: l.is_visible).mapped('menu_id.id'))
 
         # 2. Group lines
-        user_groups = user.groups_id
+        user_groups = getattr(user, 'group_ids', getattr(user, 'groups_id', self.env['res.groups']))
         group_hidden_lines = self.env['app.visibility.line'].sudo().search([
             ('group_id', 'in', user_groups.ids),
             ('is_visible', '=', False)
@@ -61,7 +61,6 @@ class IrUiMenu(models.Model):
         return hidden_ids
 
     @api.model
-    @api.returns('self')
     def get_user_roots(self):
         roots = super().get_user_roots()
         hidden_app_ids = self._get_hidden_app_menu_ids_for_user(self.env.user)

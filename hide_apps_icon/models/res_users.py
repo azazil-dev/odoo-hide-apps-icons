@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields, api
+from odoo import models, fields, api, Command
 
 class ResUsers(models.Model):
     _inherit = 'res.users'
@@ -19,7 +19,7 @@ class ResUsers(models.Model):
         existing_lines = {line.menu_id.id: line for line in self.app_visibility_line_ids}
 
         # Check group-level hidden menus for this user
-        user_groups = self.groups_id
+        user_groups = getattr(self, 'group_ids', getattr(self, 'groups_id', self.env['res.groups']))
         group_hidden_menu_ids = set(self.env['app.visibility.line'].search([
             ('group_id', 'in', user_groups.ids),
             ('is_visible', '=', False)
@@ -33,10 +33,10 @@ class ResUsers(models.Model):
                 if not line.is_custom:
                     expected_visible = menu.id not in group_hidden_menu_ids
                     if line.is_visible != expected_visible:
-                        commands.append((1, line.id, {'is_visible': expected_visible}))
+                        commands.append(Command.update(line.id, {'is_visible': expected_visible}))
             else:
                 is_visible = menu.id not in group_hidden_menu_ids
-                commands.append((0, 0, {
+                commands.append(Command.create({
                     'user_id': self.id,
                     'menu_id': menu.id,
                     'is_custom': False,
@@ -47,7 +47,7 @@ class ResUsers(models.Model):
         allowed_menu_ids = set(root_menus.ids)
         for menu_id, line in existing_lines.items():
             if menu_id not in allowed_menu_ids:
-                commands.append((2, line.id, 0))
+                commands.append(Command.delete(line.id))
 
         if commands:
             self.with_context(skip_custom_flag=True).write({'app_visibility_line_ids': commands})
@@ -74,7 +74,7 @@ class ResUsers(models.Model):
     def action_reset_to_group_defaults(self):
         """Reset visibility lines to group defaults (clear is_custom)."""
         self.ensure_one()
-        user_groups = self.groups_id
+        user_groups = getattr(self, 'group_ids', getattr(self, 'groups_id', self.env['res.groups']))
         group_hidden_menu_ids = set(self.env['app.visibility.line'].search([
             ('group_id', 'in', user_groups.ids),
             ('is_visible', '=', False)
@@ -83,7 +83,7 @@ class ResUsers(models.Model):
         commands = []
         for line in self.app_visibility_line_ids:
             expected_visible = line.menu_id.id not in group_hidden_menu_ids
-            commands.append((1, line.id, {
+            commands.append(Command.update(line.id, {
                 'is_custom': False,
                 'is_visible': expected_visible,
             }))

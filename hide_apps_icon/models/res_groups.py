@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields, api
+from odoo import models, fields, api, Command
 
 class ResGroups(models.Model):
     _inherit = 'res.groups'
@@ -19,7 +19,7 @@ class ResGroups(models.Model):
         new_lines = []
         for menu in root_menus:
             if menu.id not in existing_menu_ids:
-                new_lines.append((0, 0, {
+                new_lines.append(Command.create({
                     'group_id': self.id,
                     'menu_id': menu.id,
                     'is_visible': True,
