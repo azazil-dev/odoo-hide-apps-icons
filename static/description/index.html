@@ -43,7 +43,7 @@
              style="max-width: 100%; border: 1px solid #E2E8F0;"/>
         <p class="text-muted small mt-2">
             <i class="fa fa-map-marker me-1 text-danger"></i>
-            <strong>Settings → Users &amp; Companies → Users / Groups</strong> → pilih record → tab <strong>App Dashboard Visibility</strong>
+            <strong>Settings → Users &amp; Companies → Users / Groups</strong> → select record → <strong>App Dashboard Visibility</strong> tab
         </p>
     </div>
 
@@ -52,7 +52,7 @@
     <!-- ================================================================= -->
     <div class="card border-0 shadow-sm p-4 mb-4 rounded-4" style="background: #F0FDF4; border: 1px solid #86EFAC;">
         <h4 class="fw-bold mb-3" style="color: #065F46;">
-            <i class="fa fa-map-signs me-2"></i>Where to Find It (Lokasi Pengaturan)
+            <i class="fa fa-map-signs me-2"></i>Where to Find It (Menu Locations)
         </h4>
         <div class="row g-3">
             <div class="col-md-6">
@@ -61,13 +61,13 @@
                         <i class="fa fa-users"></i>
                     </span>
                     <div>
-                        <div class="fw-bold text-dark mb-1">1. Group Defaults (Opsional)</div>
+                        <div class="fw-bold text-dark mb-1">1. Group Defaults (Optional)</div>
                         <code class="small text-muted">
                             Settings → Users &amp; Companies → Groups<br/>
-                            → pilih group → tab <strong>"App Dashboard Visibility"</strong>
+                            → select group → <strong>"App Dashboard Visibility"</strong> tab
                         </code>
                         <p class="text-muted small mt-1 mb-0">
-                            Atur default visibilitas aplikasi root untuk seluruh anggota grup keamanan.
+                            Configure root app visibility defaults for all members of a security group.
                         </p>
                     </div>
                 </div>
@@ -81,10 +81,10 @@
                         <div class="fw-bold text-dark mb-1">2. User-Specific Visibility &amp; Exceptions</div>
                         <code class="small text-muted">
                             Settings → Users &amp; Companies → Users<br/>
-                            → pilih user → tab <strong>"App Dashboard Visibility"</strong>
+                            → select user → <strong>"App Dashboard Visibility"</strong> tab
                         </code>
                         <p class="text-muted small mt-1 mb-0">
-                            Override seting visibilitas per individu lengkap dengan penanda kolom <strong>Source</strong>.
+                            Override visibility settings per individual user, with transparent <strong>Source</strong> tracking.
                         </p>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                     <h6 class="card-title mb-0 fw-bold" style="color: #0F172A;">Group &amp; User Level</h6>
                 </div>
                 <p class="card-text text-muted small mb-0">
-                    Konfigurasi visibilitas per grup keamanan dan override per individu pengguna sesuai kebutuhan.
+                    Define visibility rules at the security group level, then easily create exceptions for individual users.
                 </p>
             </div>
         </div>
@@ -114,7 +114,7 @@
                     <h6 class="card-title mb-0 fw-bold" style="color: #0F172A;">Source Column</h6>
                 </div>
                 <p class="card-text text-muted small mb-0">
-                    Kolom asal visibilitas transparan: mengetahui apakah status berasal dari user override atau aturan grup.
+                    Transparent origin column immediately shows whether visibility originates from a group rule or a user override.
                 </p>
             </div>
         </div>
@@ -125,7 +125,7 @@
                     <h6 class="card-title mb-0 fw-bold" style="color: #0F172A;">Bulk Productivity</h6>
                 </div>
                 <p class="card-text text-muted small mb-0">
-                    Tombol aksi cepat <em>Check All</em>, <em>Uncheck All</em>, dan <em>Reset to Group Defaults</em> dalam 1 klik.
+                    Quick action buttons: <em>Check All</em>, <em>Uncheck All</em>, and <em>Reset to Group Defaults</em> in a single click.
                 </p>
             </div>
         </div>
@@ -136,7 +136,7 @@
                     <h6 class="card-title mb-0 fw-bold" style="color: #0F172A;">Settings Protection</h6>
                 </div>
                 <p class="card-text text-muted small mb-0">
-                    Menu Administrasi (Settings) terlindungi otomatis agar tidak dapat disembunyikan dari Administrator Sistem.
+                    The Administration (Settings) app is automatically protected from being hidden from Settings Administrators.
                 </p>
             </div>
         </div>
@@ -147,17 +147,17 @@
     <!-- ================================================================= -->
     <div class="card border-0 shadow-sm p-4 mb-4 rounded-4" style="background: #FFFFFF; border: 1px solid #E2E8F0;">
         <h4 class="fw-bold mb-3" style="color: #212529;">
-            <i class="fa fa-sitemap me-2 text-primary"></i>How Visibility Is Resolved (Aturan Resolusi)
+            <i class="fa fa-sitemap me-2 text-primary"></i>How Visibility Is Resolved
         </h4>
         <div class="row g-3">
             <div class="col-md-4">
                 <div class="p-3 rounded-3 h-100" style="background: #FAF5FF; border: 1px dashed #D8B4FE;">
                     <div class="d-flex align-items-center mb-2">
                         <span class="badge rounded-circle p-2 me-2" style="background-color: #714B67; color: #FFFFFF;">1</span>
-                        <h6 class="fw-bold mb-0 text-dark">User Override (Prioritas #1)</h6>
+                        <h6 class="fw-bold mb-0 text-dark">User Override (Priority #1)</h6>
                     </div>
                     <p class="text-muted small mb-0">
-                        Jika user memiliki pengaturan individual tersendiri untuk sebuah aplikasi, pengaturan ini yang langsung dimenangkan.
+                        If a user has an explicit setting configured for an application, this individual setting wins.
                     </p>
                 </div>
             </div>
@@ -165,10 +165,10 @@
                 <div class="p-3 rounded-3 h-100" style="background: #FFF7ED; border: 1px dashed #FED7AA;">
                     <div class="d-flex align-items-center mb-2">
                         <span class="badge bg-warning text-dark rounded-circle p-2 me-2">2</span>
-                        <h6 class="fw-bold mb-0 text-dark">Group Rule (Prioritas #2)</h6>
+                        <h6 class="fw-bold mb-0 text-dark">Group Rule (Priority #2)</h6>
                     </div>
                     <p class="text-muted small mb-0">
-                        Jika tidak ada override user, aplikasi disembunyikan bila minimal satu grup milik user menyembunyikannya.
+                        Without a user override, the app is hidden if at least one of the user's security groups hides it.
                     </p>
                 </div>
             </div>
@@ -179,7 +179,7 @@
                         <h6 class="fw-bold mb-0 text-dark">Default Visible</h6>
                     </div>
                     <p class="text-muted small mb-0">
-                        Jika tidak ada pembatasan baik di level user maupun grup, aplikasi root tampil normal di dashboard.
+                        If neither user nor group restricts the app, it remains visible on the dashboard by default.
                     </p>
                 </div>
             </div>
@@ -193,11 +193,11 @@
         <div class="d-flex align-items-start gap-3">
             <i class="fa fa-exclamation-triangle fa-2x text-warning mt-1"></i>
             <div>
-                <h5 class="fw-bold mb-1 text-dark">Penting: Modul Manajemen Visibilitas UI (Bukan Pembatas Hak Akses Data)</h5>
+                <h5 class="fw-bold mb-1 text-dark">Important Note: UI Menu Visibility vs. Data Security</h5>
                 <p class="mb-0 text-muted small" style="line-height: 1.6;">
-                    Modul ini bertujuan menyederhanakan dan merapikan tampilan dashboard agar bebas dari aplikasi yang tidak relevan bagi user.
-                    Modul <strong>tidak mengubah</strong> hak akses model data, Record Rules, maupun Security Groups Odoo.
-                    Jika Anda butuh membatasi akses baca/tulis data secara ketat, gunakan pengaturan Security Groups bawaan Odoo.
+                    This module is designed to provide clean, focused dashboards by hiding non-relevant root menus from users.
+                    It <strong>does not alter</strong> Odoo's backend security groups, ACLs, or Record Rules.
+                    If you need strict data access restrictions, always configure standard Odoo security groups.
                 </p>
             </div>
         </div>
@@ -208,33 +208,33 @@
     <!-- ================================================================= -->
     <div class="card border-0 shadow-sm p-4 mb-4 rounded-4" style="background: #F8FAFC; border: 1px solid #E2E8F0;">
         <h4 class="fw-bold mb-3" style="color: #212529;">
-            <i class="fa fa-check-square-o me-2 text-primary"></i>Panduan Penggunaan Cepat
+            <i class="fa fa-check-square-o me-2 text-primary"></i>Quick Setup Guide
         </h4>
         <div class="row g-3">
             <div class="col-md-4">
                 <div class="p-3 bg-white rounded-3 border h-100 shadow-sm">
-                    <div class="fw-bold text-primary mb-1">Langkah 1 — Berikan Hak Kelola</div>
-                    <p class="small text-muted mb-2">Buka user administrator yang ditugaskan:</p>
+                    <div class="fw-bold text-primary mb-1">Step 1 — Grant Permissions</div>
+                    <p class="small text-muted mb-2">Open the assigned administrator:</p>
                     <div class="p-2 bg-light rounded text-dark small">
-                        Centang hak akses <strong>Manage App Dashboard Visibility</strong>
+                        Check <strong>Manage App Dashboard Visibility</strong> access right
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="p-3 bg-white rounded-3 border h-100 shadow-sm">
-                    <div class="fw-bold text-primary mb-1">Langkah 2 — Atur Group / User</div>
-                    <p class="small text-muted mb-2">Buka tab App Dashboard Visibility:</p>
+                    <div class="fw-bold text-primary mb-1">Step 2 — Configure Visibility</div>
+                    <p class="small text-muted mb-2">Open the App Dashboard Visibility tab:</p>
                     <div class="p-2 bg-light rounded text-dark small">
-                        Hilangkan centang pada aplikasi yang ingin disembunyikan dari dashboard
+                        Uncheck applications you want to hide from groups or specific users
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="p-3 bg-white rounded-3 border h-100 shadow-sm">
-                    <div class="fw-bold text-primary mb-1">Langkah 3 — Refresh Browser</div>
-                    <p class="small text-muted mb-2">Perubahan langsung aktif:</p>
+                    <div class="fw-bold text-primary mb-1">Step 3 — Refresh Browser</div>
+                    <p class="small text-muted mb-2">Instant effect upon reload:</p>
                     <div class="p-2 bg-light rounded text-dark small">
-                        User cukup reload browser untuk melihat dashboard yang rapi dan terorganisir
+                        Users reload their browser to experience a clean, decluttered dashboard
                     </div>
                 </div>
             </div>
@@ -246,7 +246,7 @@
     <!-- ================================================================= -->
     <div class="card border-0 shadow-sm p-4 mb-4 rounded-4" style="background: #FFFFFF; border: 1px solid #E2E8F0;">
         <h5 class="fw-bold mb-3 text-dark">
-            <i class="fa fa-cogs text-primary me-2"></i>Informasi Teknis
+            <i class="fa fa-cogs text-primary me-2"></i>Technical Specifications
         </h5>
         <div class="table-responsive">
             <table class="table table-sm table-bordered align-middle mb-0" style="font-size: 0.85rem;">
@@ -261,7 +261,7 @@
                     </tr>
                     <tr>
                         <td class="table-light fw-bold">Dependencies</td>
-                        <td><code>base</code>, <code>web</code> (tanpa external library tambahan)</td>
+                        <td><code>base</code>, <code>web</code> (no third-party Python packages required)</td>
                     </tr>
                     <tr>
                         <td class="table-light fw-bold">Security Group</td>
