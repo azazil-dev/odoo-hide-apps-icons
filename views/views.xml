@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- res.groups form view inheritance -->
+        <record id="view_groups_form_hide_apps_icon" model="ir.ui.view">
+            <field name="name">res.groups.form.hide.apps.icon</field>
+            <field name="model">res.groups</field>
+            <field name="inherit_id" ref="base.view_groups_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="App Dashboard Visibility" name="app_dashboard_visibility" groups="hide_apps_icon.group_manage_app_visibility">
+                        <header>
+                            <button name="action_load_apps_visibility" type="object" string="Sync Apps" class="btn btn-secondary"/>
+                            <button name="action_check_all_apps" type="object" string="Check All" class="btn btn-secondary"/>
+                            <button name="action_uncheck_all_apps" type="object" string="Uncheck All" class="btn btn-secondary"/>
+                        </header>
+                        <field name="app_visibility_line_ids">
+                            <tree string="App Dashboard Visibility" editable="bottom" create="false" delete="false">
+                                <field name="sequence" widget="handle"/>
+                                <field name="menu_id" readonly="1" force_save="1" string="Application"/>
+                                <field name="is_visible" string="Show on Dashboard"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- res.users form view inheritance -->
+        <record id="view_users_form_hide_apps_icon" model="ir.ui.view">
+            <field name="name">res.users.form.hide.apps.icon</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="App Dashboard Visibility" name="app_dashboard_visibility" groups="hide_apps_icon.group_manage_app_visibility">
+                        <header>
+                            <button name="action_refresh_app_visibility" type="object" string="Sync Apps" class="btn btn-secondary"/>
+                            <button name="action_check_all_apps" type="object" string="Check All" class="btn btn-secondary"/>
+                            <button name="action_uncheck_all_apps" type="object" string="Uncheck All" class="btn btn-secondary"/>
+                            <button name="action_reset_to_group_defaults" type="object" string="Reset to Group Defaults" class="btn btn-secondary"/>
+                        </header>
+                        <field name="app_visibility_line_ids">
+                            <tree string="App Dashboard Visibility" editable="bottom" create="false" delete="false">
+                                <field name="sequence" widget="handle"/>
+                                <field name="menu_id" readonly="1" force_save="1" string="Application"/>
+                                <field name="is_visible" string="Show on Dashboard"/>
+                                <field name="source" readonly="1" string="Source"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

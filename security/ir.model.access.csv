@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_app_visibility_line_manager,app.visibility.line.manager,model_app_visibility_line,hide_apps_icon.group_manage_app_visibility,1,1,1,1
+access_app_visibility_line_user,app.visibility.line.user,model_app_visibility_line,base.group_user,1,0,0,0
