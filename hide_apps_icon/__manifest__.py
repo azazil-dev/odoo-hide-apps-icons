@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "App Dashboard Visibility",
-    'version': '17.0.1.0.0',
+    'version': '18.0.1.0.0',
     'category': 'Extra Tools',
     'summary': "Control root applications dashboard visibility per group and per user",
     'description': """
